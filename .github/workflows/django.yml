@@ -8,30 +8,37 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4
       matrix:
         python-version: [3.10]
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
+
+    - name: Install system packages
+      run: |
+        sudo apt update
+        sudo apt install -y libgl1-mesa-glx tesseract-ocr libtesseract-dev
+
+    - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install gdown
-        pip install -r myproject/requirement.txt
-        cd myproject/myapp && gdown https://drive.google.com/uc?id=1UXU1FV6ZNuB0HOJDrledlOjdkRNxLMZv
-        cd ..
-        sudo apt update
-        sudo apt install libgl1-mesa-glx
-        sudo apt install tesseract-ocr
-        sudo apt install libtesseract-dev
+        pip install -r myproject/requirements.txt  # confirm path/name
+
+    - name: Download Model from Google Drive
+      run: |
+        cd myproject/myapp
+        gdown https://drive.google.com/uc?id=1UXU1FV6ZNuB0HOJDrledlOjdkRNxLMZv
+        cd ../..
+
     - name: Run Tests
       run: |
+        cd myproject
         python manage.py test
