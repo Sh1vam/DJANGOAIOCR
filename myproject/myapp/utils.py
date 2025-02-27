@@ -8,13 +8,13 @@ import numpy as np
 from PIL import Image
 
 # Path to Tesseract
-TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+TESSERACT_PATH = r'/usr/bin/tesseract'#r"C:\Program Files\Tesseract-OCR\tesseract.exe" which tesseract ,  whereis tesseract
 pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 
 # Load Faster R-CNN model
 # MODEL_PATH = r"C:\Users\BAPS\Desktop\New folder\myenv\myproject\myapp\model_3.pth"
 
-MODEL_PATH = os.path.dirname(os.path.realpath(__file__))+"\model_3.pth"
+MODEL_PATH = os.path.dirname(os.path.realpath(__file__))+"/model_3.pth"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
