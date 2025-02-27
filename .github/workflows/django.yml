@@ -29,7 +29,8 @@ jobs:
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # confirm path/name
+        ls
+        pip install -r /myproject/requirements.txt  # confirm path/name
 
     - name: Download Model from Google Drive
       run: |
