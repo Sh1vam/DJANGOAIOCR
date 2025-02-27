@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import ExtractedData
 from .utils import detect_text
+from django.shortcuts import render
 
 class UploadExtractImageView(APIView):
     parser_classes = (MultiPartParser, FormParser)
@@ -66,3 +67,6 @@ class GetExtractedDataView(APIView):
             })
 
         return JsonResponse({"extracted_results": data_list}, safe=False, status=200)
+    
+def index(request):
+    return render(request,"upload.html")
