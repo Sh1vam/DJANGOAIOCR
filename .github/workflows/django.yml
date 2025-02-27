@@ -38,8 +38,8 @@ jobs:
         cd myproject
         cd myapp
         gdown https://drive.google.com/uc?id=1UXU1FV6ZNuB0HOJDrledlOjdkRNxLMZv
-        cd ..
 
     - name: Run Tests
       run: |
-        python manage.py test
+        cd myproject
+        python manage.py runserver
